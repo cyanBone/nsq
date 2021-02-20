@@ -43,7 +43,9 @@ func (p *Producer) Publish(topic string, message []byte) error {
 }
 
 func (p *Producer) Stop() {
-	p.producer.Stop()
+	if p.producer != nil {
+		p.producer.Stop()
+	}
 }
 
 type handle struct {
@@ -73,7 +75,9 @@ func (nc *Consumer) Consumer(topic string, channel string, thread int, handler f
 }
 
 func (nc *Consumer) Stop() {
-	nc.consumer.Stop()
+	if nc.consumer != nil {
+		nc.consumer.Stop()
+	}
 }
 
 // 创建nsq消费者
